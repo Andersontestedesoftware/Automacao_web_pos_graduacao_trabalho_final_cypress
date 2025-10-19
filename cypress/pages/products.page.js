@@ -7,44 +7,38 @@ class Products {
 
   // Abre a página de detalhes de um produto pela posição (index) na lista
   openProductByIndex(index = 3) {
-    // Seleciona o N-ésimo produto procurando pelos elementos '.product-image-wrapper'
-    cy.get('.features_items')
-      .find('.product-image-wrapper')
-      .eq(index - 1)
-      .find('.choose .nav li a')
-      .click();
+  // Seleciona o produto por posição usando o seletor exato (igual ao teste que passa)
+  cy.get(`.features_items > :nth-child(${index}) > .product-image-wrapper > .choose > .nav > li > a`).click();
   }
 
   // Adiciona um produto ao carrinho a partir da seção de 'features'
   addProductToCartFromFeatures(index = 3) {
-    cy.get('.features_items')
-      .find('.product-image-wrapper')
-      .eq(index - 1)
-      .find('.single-products .productinfo .btn')
-      .click();
+  // Usa o seletor exato para adicionar ao carrinho (mesmo do teste que passa)
+  cy.get(`.features_items > :nth-child(${index}) > .product-image-wrapper > .single-products > .productinfo > .btn`).click();
   }
 
   // Verifica se o modal exibido após adicionar ao carrinho contém determinado texto
   verifyModalContains(text) {
-  // Procura dentro do corpo do modal por um elemento que contenha o texto (mais robusto que :nth-child)
-  cy.get('.modal-body').contains(text).should('exist');
+  // Verifica o texto no modal usando o seletor usado no teste que passa
+  cy.get('.modal-body > :nth-child(1)').should('contain', text);
   }
 
   // Clica no botão de continuar/fechar presente no modal
   continueFromModal() {
-  // Fecha/continua usando o botão com texto 'Continue' ou botão padrão dentro do modal
-  cy.get('.modal-body').contains(/(Continue|Continue Shopping|Continue to Checkout)/i).click();
+  // Alinha com o fluxo do teste original: clica no segundo filho do body do modal
+  cy.get('.modal-body > :nth-child(2)').click();
   }
 
   // Vai para a página de carrinho e procede para checkout
   viewCartAndProceed() {
-  // Usa texto do botão para maior estabilidade
-  cy.get('.col-sm-6').contains('Proceed To Checkout').click();
+  // Mantém o seletor do teste que passa
+  cy.get('.col-sm-6 > .btn').click();
   }
 
   // Verifica se o carrinho contém um produto com o nome esperado
   verifyCartHasProduct(name) {
-    cy.get('.cart_description > h4').should('be.visible').and('contain.text', name);
+  // Usa o seletor exato que o teste usa e que está funcionando
+  cy.get('.cart_description > h4').should('be.visible').and('contain.text', name);
   }
 
   // Pesquisa produto pelo nome usando o campo de busca
