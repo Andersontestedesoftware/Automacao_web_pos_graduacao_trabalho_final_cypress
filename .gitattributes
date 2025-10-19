@@ -1,0 +1,15 @@
+ # Normalize todos os arquivos de texto e prefira LF
+ * text=auto
+ *.sh eol=lf
+ *.yml eol=lf
+ *.yaml eol=lf
+ *.js eol=lf
+ *.ts eol=lf
+ *.json eol=lf
+ *.css eol=lf
+ *.html eol=lf
+ *.md eol=lf
+ *.py eol=lf
+ *.java eol=lf
+ # Mantém CRLF para arquivos de lote do Windows
+ *.bat eol=crlf
