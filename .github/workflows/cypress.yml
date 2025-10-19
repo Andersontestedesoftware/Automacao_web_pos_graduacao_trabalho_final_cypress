@@ -9,6 +9,9 @@ on:
 jobs:
   run-trabalho-final:
     runs-on: ubuntu-latest
+    env:
+      TERM: xterm-256color
+      DBUS_SESSION_BUS_ADDRESS: /dev/null
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -22,7 +25,11 @@ jobs:
         run: npm ci
 
       - name: Run trabalho_final.spec
-        run: npx cypress run --spec "cypress/e2e/trabalho_final.cy.js" --reporter cypress-mochawesome-reporter
+        run: |
+          npx cypress run --spec "cypress/e2e/trabalho_final.cy.js" \
+            --reporter cypress-mochawesome-reporter \
+            --browser electron --headless -- \
+            --disable-gpu --disable-software-rasterizer
 
       - name: Upload reports
         uses: actions/upload-artifact@v4
