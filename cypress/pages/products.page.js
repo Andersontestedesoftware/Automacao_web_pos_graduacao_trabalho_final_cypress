@@ -7,27 +7,39 @@ class Products {
 
   // Abre a página de detalhes de um produto pela posição (index) na lista
   openProductByIndex(index = 3) {
-    cy.get(`:nth-child(${index}) > .product-image-wrapper > .choose > .nav > li > a`).click();
+    // Seleciona o N-ésimo produto procurando pelos elementos '.product-image-wrapper'
+    cy.get('.features_items')
+      .find('.product-image-wrapper')
+      .eq(index - 1)
+      .find('.choose .nav li a')
+      .click();
   }
 
   // Adiciona um produto ao carrinho a partir da seção de 'features'
   addProductToCartFromFeatures(index = 3) {
-    cy.get(`.features_items > :nth-child(${index}) > .product-image-wrapper > .single-products > .productinfo > .btn`).click();
+    cy.get('.features_items')
+      .find('.product-image-wrapper')
+      .eq(index - 1)
+      .find('.single-products .productinfo .btn')
+      .click();
   }
 
   // Verifica se o modal exibido após adicionar ao carrinho contém determinado texto
   verifyModalContains(text) {
-    cy.get('.modal-body > :nth-child(1)').should('contain', text);
+  // Procura dentro do corpo do modal por um elemento que contenha o texto (mais robusto que :nth-child)
+  cy.get('.modal-body').contains(text).should('exist');
   }
 
   // Clica no botão de continuar/fechar presente no modal
   continueFromModal() {
-    cy.get('.modal-body > :nth-child(2)').click();
+  // Fecha/continua usando o botão com texto 'Continue' ou botão padrão dentro do modal
+  cy.get('.modal-body').contains(/(Continue|Continue Shopping|Continue to Checkout)/i).click();
   }
 
   // Vai para a página de carrinho e procede para checkout
   viewCartAndProceed() {
-    cy.get('.col-sm-6 > .btn').click();
+  // Usa texto do botão para maior estabilidade
+  cy.get('.col-sm-6').contains('Proceed To Checkout').click();
   }
 
   // Verifica se o carrinho contém um produto com o nome esperado
