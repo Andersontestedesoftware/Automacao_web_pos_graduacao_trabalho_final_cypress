@@ -1,0 +1,31 @@
+name: Cypress - trabalho_final
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  run-trabalho-final:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run trabalho_final.spec
+        run: npx cypress run --spec "cypress/e2e/trabalho_final.cy.js" --reporter cypress-mochawesome-reporter
+
+      - name: Upload reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: mochawesome-reports
+          path: cypress/reports
