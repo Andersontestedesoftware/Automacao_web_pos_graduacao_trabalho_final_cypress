@@ -24,7 +24,7 @@ describe('Automation Exercise', () => {
   });
 
   // Teste 1: registra usuário novo
-  it('Caso de teste 1: Registrar usuário', () => {
+  it('Test Case 1: Register User', () => {
     const timestamp = new Date().getTime();
     const firstName = faker.person.firstName();
     const lastName = faker.person.firstName(); 
@@ -36,7 +36,7 @@ describe('Automation Exercise', () => {
 
 
   // Teste 2: login com credenciais corretas e validações básicas de UI
-  it('Caso de teste 2: Faça login no usuário com e-mail e senha corretos', () => {
+  it('Test Case 2: Login User with correct email and password', () => {
     auth.login('qa-tester-1759530219181@test.com', '12345');
     // Verifica elementos relevantes que confirmam que o usuário está logado
     account.verifyLoggedIn('QA Tester');
@@ -45,14 +45,14 @@ describe('Automation Exercise', () => {
 
 
   // Teste 3: login com senha inválida e valida mensagem de erro
-  it('Caso de teste 3: Fazer login no usuário com e-mail e senha incorretos', () => {
+  it('Test Case 3: Login User with incorrect email and password', () => {
     auth.login('qa-tester-1759530219181@test.com', '99754321');
     // Mensagem exibida pelo formulário de login
     cy.get('.login-form > form > p').should('contain', 'Your email or password is incorrect!');
   });
 
   // Teste 4: logout e verificação de estado anônimo
-  it('Caso de teste 4: Fazer logout do usuário', () => {
+  it('Test Case 4: Logout User', () => {
     auth.login('qa-tester-1759530219181@test.com', '12345');
     account.verifyLoggedIn('QA Tester');
     // Realiza logout usando o page object
@@ -66,14 +66,14 @@ describe('Automation Exercise', () => {
 
 
   // Teste 5: tentativa de cadastro com email já existente e validação da mensagem
-  it('Caso de teste 5: Registrar usuário com e-mail existente', () => {
+  it('Test Case 5: Register User with existing email', () => {
     auth.signup('QA Tester', 'qa-tester-1759530219181@test.com');
     cy.contains('button', 'Signup').click();
     cy.get('.signup-form > form > p').should('contain', 'Email Address already exist!');
   });
 
   // Teste 6: formulário de contato usando fixture e upload de arquivo
-  it('Caso de teste 6: Formulário de contato', () => {
+  it('Test Case 6: Contact Us Form', () => {
     contact.openContact();
     contact.fillContact({
       name: userData.name,
@@ -85,7 +85,7 @@ describe('Automation Exercise', () => {
   });
 
   // Teste 8: navegação até produtos e verificação de elementos da página de detalhes
-  it('Caso de teste 8: Verificar todos os produtos e a página de detalhes do produto', () => {
+  it('Test Case 8: Verify All Products and product detail page', () => {
     // Faz login com helper e validações em produto com page object
     loginUser();
     products.goToProducts();
@@ -96,7 +96,7 @@ describe('Automation Exercise', () => {
 
 
   // Teste 9: pesquisa de produto
-  it('Caso de teste 9: Pesquisar produto', () => {
+  it('Test Case 9: Search Product', () => {
     auth.login('qa-tester-1759530219181@test.com', '12345');
     products.goToProducts();
     products.searchProduct('Blue Top');
@@ -114,7 +114,7 @@ describe('Automation Exercise', () => {
 
 
   // Teste 15: fluxo de compra com registro, adição ao carrinho e pagamento
-  it('Caso de teste 15: Faça o pedido: Registre-se antes de finalizar a compra', () => {
+  it('Test Case 15: Place Order: Register before Checkout', () => {
     const data = createTestData();
     // Registra usuário utilizando o helper
     registerUser({ firstName: data.firstName, lastName: data.lastName, email: `qa-tester-${data.timestamp}@test.com`, mobile: data.converteu });
