@@ -9,9 +9,18 @@ on:
 jobs:
   run-trabalho-final:
     runs-on: ubuntu-latest
+
     env:
       TERM: xterm-256color
+      # Evita o erro do DBus (Failed to connect to the bus)
       DBUS_SESSION_BUS_ADDRESS: /dev/null
+      # Desativa avisos e renderização de GPU no Electron
+      ELECTRON_DISABLE_SECURITY_WARNINGS: true
+      LIBGL_ALWAYS_SOFTWARE: 1
+      QT_QPA_PLATFORM: offscreen
+      # Cypress desativa logs verbosos
+      DEBUG: ""
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -24,12 +33,19 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run trabalho_final.spec
+      - name: Run trabalho_final.spec (Electron)
         run: |
-          npx cypress run --spec "cypress/e2e/trabalho_final.cy.js" \
+          npx cypress run \
+            --spec "cypress/e2e/trabalho_final.cy.js" \
             --reporter cypress-mochawesome-reporter \
-            --browser electron --headless -- \
-            --disable-gpu --disable-software-rasterizer
+            --browser electron --headless \
+            -- \
+            --disable-gpu \
+            --disable-dev-shm-usage \
+            --disable-logging \
+            --mute-audio \
+            --disable-software-rasterizer \
+            2>/dev/null
 
       - name: Upload reports
         uses: actions/upload-artifact@v4
