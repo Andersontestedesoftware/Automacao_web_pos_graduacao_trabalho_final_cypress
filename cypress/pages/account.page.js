@@ -1,3 +1,4 @@
+//
 // Page Object para ações e verificações relacionadas à conta do usuário
 class Account {
   // Verifica se o usuário está logado exibindo o nome no cabeçalho
