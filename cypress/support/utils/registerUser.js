@@ -1,4 +1,4 @@
-import auth from '../../pages/auth.page';
+import auth from '../../pages/account/auth.page';
 import { faker } from '@faker-js/faker';
 
 // Helper reutilizável para registrar um usuário.

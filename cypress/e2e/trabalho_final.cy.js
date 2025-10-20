@@ -4,13 +4,13 @@
 import userData from '../fixtures/example.json';
 import { faker } from '@faker-js/faker';
 // Importa os page objects que encapsulam ações na UI
-import auth from '../../cypress/pages/auth.page';
-import account from '../../cypress/pages/account.page';
-import products from '../../cypress/pages/products.page';
-import contact from '../../cypress/pages/contact.page';
-import { registerUser } from '../../cypress/support/utils/registerUser';
-import { loginUser } from '../../cypress/support/utils/loginUser';
-import { createTestData } from '../../cypress/support/utils/generateTestData';
+import auth from '../pages/account/auth.page';
+import account from '../pages/account/account.page';
+import products from '../pages/product/products.page';
+import contact from '../pages/account/contact.page';
+import { registerUser } from '../support/utils/registerUser';
+import { loginUser } from '../support/utils/loginUser';
+import { createTestData } from '../support/utils/generateTestData';
 
 // Suite de testes principal
 describe('Automation Exercise', () => {
@@ -33,7 +33,6 @@ describe('Automation Exercise', () => {
     // Usa o helper registerUser para evitar duplicação de código
     registerUser({ firstName, lastName, email });
   });
-
 
   // Teste 2: login com credenciais corretas e validações básicas de UI
   it('Test Case 2: Login User with correct email and password', () => {

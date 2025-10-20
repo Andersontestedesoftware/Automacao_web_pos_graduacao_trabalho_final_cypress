@@ -10,9 +10,8 @@ class Account {
 
   // Verificações mais específicas para a exibição "Logged in as ..."
   verifyLoggedInExact(fullName) {
-    // Seleciona o décimo item da lista (onde o texto aparece) e verifica o texto exato
-  // Seleciona o link que contém o texto 'Logged in as ...' em vez de usar :nth-child
-  cy.contains('a', `Logged in as ${fullName}`).should('be.visible').and('have.text', ` Logged in as ${fullName}`);
+    // Seleciona o link que contém o texto 'Logged in as ...' em vez de usar :nth-child
+    cy.contains('a', `Logged in as ${fullName}`).should('be.visible').and('have.text', ` Logged in as ${fullName}`);
     // Verifica também que existe um <b> com o nome do usuário
     cy.contains('b', fullName);
     // Garante que o texto compósito esteja visível na página
@@ -21,9 +20,8 @@ class Account {
 
   // Exclui a conta clicando no link apropriado e confirma a mensagem de sucesso
   deleteAccount() {
-    // Clica no link responsável pela exclusão (a localização exata pode variar conforme a página)
-  // Usa o texto do link (mais estável do que :nth-child)
-  cy.contains('a', /Delete Account/i).click();
+    // Usa o texto do link (mais estável do que :nth-child)
+    cy.contains('a', /Delete Account/i).click();
     // Verifica se a mensagem de conta excluída está presente
     cy.get('[data-qa="account-deleted"]').should('exist').and('contain.text', 'Account Deleted!');
     // Clica em continuar após exclusão
