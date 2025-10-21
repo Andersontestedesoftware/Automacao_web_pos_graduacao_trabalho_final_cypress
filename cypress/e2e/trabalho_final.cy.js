@@ -63,7 +63,6 @@ describe('Automation Exercise', () => {
     cy.get('a[href="/login"]').should('contain', 'Signup / Login'); 
   });
 
-
   // Teste 5: tentativa de cadastro com email já existente e validação da mensagem
   it('Test Case 5: Register User with existing email', () => {
     auth.signup('QA Tester', 'qa-tester-1759530219181@test.com');
@@ -150,6 +149,5 @@ describe('Automation Exercise', () => {
     // Exclui conta ao final do fluxo
     account.deleteAccount();
   });
-
 
 });
