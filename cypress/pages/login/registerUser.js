@@ -1,8 +1,7 @@
-import auth from '../../pages/account/auth.page';
+import auth from '../account/auth.page';
 import { faker } from '@faker-js/faker';
 
-// Helper reutilizável para registrar um usuário.
-// Exportamos a função para ser usada nos specs.
+// Helper reutilizável para registrar um usuário (now placed under pages/login)
 export function registerUser({ firstName, lastName, email, password = '12345', mobile = '111 222 333' }) {
   const name = `${firstName} ${lastName}`;
   // Preenche o formulário inicial (nome e email) e submete

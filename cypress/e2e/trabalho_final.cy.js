@@ -8,9 +8,9 @@ import auth from '../pages/account/auth.page';
 import account from '../pages/account/account.page';
 import products from '../pages/product/products.page';
 import contact from '../pages/account/contact.page';
-import { registerUser } from '../support/utils/registerUser';
-import { loginUser } from '../support/utils/loginUser';
-import { createTestData } from '../support/utils/generateTestData';
+import { registerUser } from '../pages/login/registerUser';
+import { loginUser } from '../pages/login/loginUser';
+import { createTestData } from '../pages/login/generateTestData';
 
 // Suite de testes principal
 describe('Automation Exercise', () => {

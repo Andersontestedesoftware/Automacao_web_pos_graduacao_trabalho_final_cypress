@@ -6,7 +6,7 @@ O código foi organizado com page objects e helpers para facilitar leitura, manu
 ## Estrutura principal
 - `cypress/e2e/` — specs (cenários de teste)
 - `cypress/pages/` — page objects (classes/objetos que expõem ações e seletores)
-- `cypress/support/utils/` — helpers e geradores de dados
+- `cypress/pages/login/` — helpers e geradores de dados relacionados a login/registro
 - `cypress.config.js` — configuração do Cypress e do repórter
 
 ## Pré-requisitos
