@@ -2,6 +2,9 @@ const { defineConfig } = require("cypress");
 
 module.exports = defineConfig({
   e2e: {
+  // Ajustes de timeout para reduzir falsos negativos em ambientes lentos (CI)
+  pageLoadTimeout: 120000,
+  defaultCommandTimeout: 10000,
     reporter: 'cypress-mochawesome-reporter',
     reporterOptions: {
       charts: true,

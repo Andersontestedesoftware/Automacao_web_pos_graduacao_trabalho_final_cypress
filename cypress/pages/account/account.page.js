@@ -2,10 +2,16 @@
 class Account {
   // Verifica se o usuário está logado exibindo o nome no cabeçalho
   verifyLoggedIn(fullName) {
-    // O ícone de usuário está dentro de um elemento <i> com classe fa-user; pegamos o pai que contém o texto
-    cy.get('i.fa-user').parent().should('contain', fullName);
-    // Verifica se o link de logout está visível
-    cy.get('a[href="/logout"]').should('be.visible');
+    // Evita seletor frágil baseado em ícone. Preferimos um texto/elemento que confirme que o usuário está logado.
+    // Aguarda até 10s por um link que contenha o texto 'Logged in as <fullName>' (mais robusto)
+    cy.contains('a', `Logged in as ${fullName}`, { timeout: 10000 })
+      .should('be.visible')
+      // também aceita que o texto esteja presente em qualquer lugar da página
+      .then(() => {
+        cy.contains(`Logged in as ${fullName}`).should('be.visible');
+      });
+    // Verifica se o link de logout está visível (com timeout)
+    cy.get('a[href="/logout"]', { timeout: 10000 }).should('be.visible');
   }
 
   // Verificações mais específicas para a exibição "Logged in as ..."

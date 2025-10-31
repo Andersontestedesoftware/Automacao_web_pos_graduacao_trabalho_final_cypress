@@ -17,5 +17,7 @@
 
 // End of custom commands
 
+
+
 // NOTE: The click overwrite was removed because it interfered with Cypress' command queue.
 // Use cy.visualClick(selector) in tests or page objects where you want a visual marker + screenshot.

@@ -2,19 +2,29 @@
 class Products {
   // Navega até a página de produtos clicando no link apropriado
   goToProducts() {
-    cy.get('a[href="/products"]').should('be.visible').click();
+  // Navega até a página de produtos e espera pelo título da página
+  cy.get('a[href="/products"]').should('be.visible').click();
+  cy.get('.title', { timeout: 20000 }).should('be.visible');
   }
 
   // Abre a página de detalhes de um produto pela posição (index) na lista
   openProductByIndex(index = 3) {
-  // Seleciona o produto por posição usando o seletor exato (igual ao teste que passa)
-  cy.get(`.features_items > :nth-child(${index}) > .product-image-wrapper > .choose > .nav > li > a`).click();
+  // Seleciona o produto por posição e aguarda a navegação
+  cy.get(`.features_items > :nth-child(${index}) > .product-image-wrapper > .choose > .nav > li > a`, { timeout: 10000 })
+    .should('be.visible')
+    .click();
+  // Aguarda que a área de produto esteja visível
+  cy.get('.product-information', { timeout: 20000 }).should('be.visible');
   }
 
   // Adiciona um produto ao carrinho a partir da seção de 'features'
   addProductToCartFromFeatures(index = 3) {
-  // Usa o seletor exato para adicionar ao carrinho (mesmo do teste que passa)
-  cy.get(`.features_items > :nth-child(${index}) > .product-image-wrapper > .single-products > .productinfo > .btn`).click();
+  // Usa o seletor exato para adicionar ao carrinho e aguarda modal
+  cy.get(`.features_items > :nth-child(${index}) > .product-image-wrapper > .single-products > .productinfo > .btn`, { timeout: 10000 })
+    .should('be.visible')
+    .click();
+  // Aguarda o modal aparecer
+  cy.get('.modal-body', { timeout: 15000 }).should('be.visible');
   }
 
   // Verifica se o modal exibido após adicionar ao carrinho contém determinado texto

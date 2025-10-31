@@ -6,7 +6,7 @@ class Auth {
   openLogin() { 
     cy.get('a[href="/login"]').click(); 
   }
-  signup(name, email) { 
+  signup(name, email) {
     cy.get('[data-qa="signup-name"]')
       .clear()
       .type(name); 
