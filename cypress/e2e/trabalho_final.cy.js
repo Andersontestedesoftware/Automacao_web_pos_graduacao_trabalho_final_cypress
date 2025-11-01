@@ -83,7 +83,7 @@ describe('Automation Exercise', () => {
   // Teste 5: tentativa de cadastro com email já existente e validação da mensagem
   it('Test Case 5: Register User with existing email', () => {
     // Usa o email criado no Test Case 1 e tenta cadastrar com outra senha
-    const differentPassword = '98765';
+    const differentPassword = '98765';//
     auth.signup('QA Tester', shared.email);
     // Se o formulário expander e pedir senha, tenta preencher com a senha diferente (defensivo)
     cy.get('body').then(($body) => {
